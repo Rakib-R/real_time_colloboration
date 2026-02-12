@@ -1,5 +1,6 @@
 
 import EditorClientWrapper from "../EditorClientWrapper";
+import Toolbar from "./Toolbar";
 
 interface DocumentProps { params: Promise<{documentId: string}> }
 
@@ -7,10 +8,9 @@ const DocumentLayout = async ({ params }: DocumentProps) => {
   const { documentId } = await params;
 
   return (
-    <main className="max-w-min min-h-screen bg-red-500">
-      <div className="min-h-screen flex flex-col">
+    <main className="flex flex-col w-dvw mx-auto">
+        <Toolbar />
         <EditorClientWrapper documentId={documentId} />
-      </div>
     </main>
   );
 };
