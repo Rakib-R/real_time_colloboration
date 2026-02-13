@@ -2,6 +2,7 @@
 
  import {useEditor, EditorContent} from '@tiptap/react'
  import StarterKit from '@tiptap/starter-kit'
+ 
 // Task lists
 import TaskList from '@tiptap/extension-task-list'
 import TaskItem from '@tiptap/extension-task-item'
@@ -132,16 +133,14 @@ import Ruler from './ruler'
   }
 
    return (
-     <main className='relative w-2/3 mx-auto box-border
-      print:p-0 print:bg-white print:overflow-visible'>
-
-        <Ruler />
-        <Separator orientation='horizontal' className='w-full bg-neutral-300'  />
-        <EditorContent  className=" box-border
-            w-full min-h-[300px] bg-white border border-[#C7C7C7] 
-          cursor-text focus:outline-none print:border-0 ProseMirror"
-              editor={editor}/>
-     </main>
+     <main className='px-48 mx-auto bg-white shadow-sm print:shadow-none'>
+      <Ruler />
+      <Separator orientation='horizontal' className='w-full bg-neutral-300' />
+      <EditorContent 
+        className="ProseMirror w-full min-h-[1056px] border-2 border-neutral-300 cursor-text focus:outline-none" 
+        editor={editor}
+    />
+  </main>
    )
  }
  

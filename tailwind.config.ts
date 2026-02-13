@@ -11,6 +11,9 @@ export default {
 "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   theme: {
   	extend: {
+		height: {
+			'4dvh': '4dvh',
+			},
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',

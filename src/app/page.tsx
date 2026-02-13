@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 
 export default function Home() {
   return (
-    <div className="">
+    <div className="m-8">
       App
     </div>
   );

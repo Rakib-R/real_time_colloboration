@@ -589,7 +589,7 @@ const FontFamilyButton = () => {
                 onClick={() => editor?.chain().focus().setFontFamily(value).run()}
                 className={cn(
                   "flex items-center gap-x-2 px-2 py-1 border-t-2 rounded-sm hover:bg-neutral-200/80",
-                  editor?.getAttributes('textStyle').FontFamily === value && 'bg-neutral-200/80'
+                  editor?.getAttributes('textStyle').fontFamily === value && 'bg-neutral-200/80'
                 )}
                 style={{fontFamily: value}}
             >
@@ -703,8 +703,8 @@ const Toolbar = () => {
   ]
 
   return (
-    <div className='flex items-center box-border max-w-screen-lg w-full mx-auto my-4 px-4 py-1 gap-x-1
-    bg-[#b8d3ff] z-10'>
+    <div className='bottom-0 flex items-center justify-center max-w-screen mt-auto px-4 py-2 gap-x-1
+    bg-[#b8d3ff] text-black z-10'>
       
       {sections[0].map((item) => (
         <ToolbarButton key={item.label} {...item}/>
