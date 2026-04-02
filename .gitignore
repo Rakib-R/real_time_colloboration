@@ -13,6 +13,11 @@
 # testing
 /coverage
 
+# env files (can opt-in for committing if needed)
+.env*
+.env.local*
+.npmrc
+
 # next.js
 /.next/
 /out/
@@ -29,8 +34,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# env files (can opt-in for committing if needed)
-.env*
 
 # vercel
 .vercel

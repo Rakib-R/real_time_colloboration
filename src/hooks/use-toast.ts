@@ -1,6 +1,5 @@
-"use client"
 
-// Inspired by react-hot-toast library
+"use client"
 import * as React from "react"
 
 import type {
@@ -58,11 +57,12 @@ interface State {
 
 const toastTimeouts = new Map<string, ReturnType<typeof setTimeout>>()
 
+// TODO 1)  SUB REDUCER --- SUB REDUCER   ---- SUB REDUCER
+
 const addToRemoveQueue = (toastId: string) => {
   if (toastTimeouts.has(toastId)) {
     return
   }
-
   const timeout = setTimeout(() => {
     toastTimeouts.delete(toastId)
     dispatch({
@@ -73,7 +73,19 @@ const addToRemoveQueue = (toastId: string) => {
 
   toastTimeouts.set(toastId, timeout)
 }
+// TODO  2)  SUB REDUCER --- SUB REDUCER   ---- SUB REDUCER
+  export const dismissToast = (toastId?: string) => {
+    if (toastId) {
+      addToRemoveQueue(toastId)
+    } else {
+      // Access the current memoryState directly
+      memoryState.toasts.forEach((t) => addToRemoveQueue(t.id))
+    }
+    dispatch({ type: "DISMISS_TOAST", toastId })
+  }
 
+
+// TODO   MAIN REDUCER --- MAIN REDUCER   ---- MAIN REDUCER   MAIN REDUCER --- MAIN REDUCER   ---- MAIN REDUCER
 export const reducer = (state: State, action: Action): State => {
   switch (action.type) {
     case "ADD_TOAST":
@@ -92,17 +104,7 @@ export const reducer = (state: State, action: Action): State => {
 
     case "DISMISS_TOAST": {
       const { toastId } = action
-
-      // ! Side effects ! - This could be extracted into a dismissToast() action,
-      // but I'll keep it here for simplicity
-      if (toastId) {
-        addToRemoveQueue(toastId)
-      } else {
-        state.toasts.forEach((toast) => {
-          addToRemoveQueue(toast.id)
-        })
-      }
-
+      //! - This HAS BEEN extracted into a dismissToast() action,
       return {
         ...state,
         toasts: state.toasts.map((t) =>
@@ -150,7 +152,8 @@ function toast({ ...props }: Toast) {
       type: "UPDATE_TOAST",
       toast: { ...props, id },
     })
-  const dismiss = () => dispatch({ type: "DISMISS_TOAST", toastId: id })
+
+  const dismissToast = () => dispatch({ type: "DISMISS_TOAST", toastId: id })
 
   dispatch({
     type: "ADD_TOAST",
@@ -159,14 +162,14 @@ function toast({ ...props }: Toast) {
       id,
       open: true,
       onOpenChange: (open) => {
-        if (!open) dismiss()
+        if (!open) dismissToast()
       },
     },
   })
 
   return {
     id: id,
-    dismiss,
+    dismissToast,
     update,
   }
 }
@@ -187,7 +190,7 @@ function useToast() {
   return {
     ...state,
     toast,
-    dismiss: (toastId?: string) => dispatch({ type: "DISMISS_TOAST", toastId }),
+    dismissToast: (toastId?: string) => dispatch({ type: "DISMISS_TOAST", toastId }),
   }
 }
 

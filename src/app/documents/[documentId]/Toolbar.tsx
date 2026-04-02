@@ -703,8 +703,8 @@ const Toolbar = () => {
   ]
 
   return (
-    <div className='bottom-0 flex items-center justify-center max-w-screen mt-auto px-4 py-2 gap-x-1
-    bg-[#b8d3ff] text-black z-10'>
+    <div className='squircle bottom-0 flex items-center justify-center gap-x-1 
+    mx-8 mt-auto px-4 py-2 bg-[#b8d3ff] text-black z-10 rounded-sq'>
       
       {sections[0].map((item) => (
         <ToolbarButton key={item.label} {...item}/>

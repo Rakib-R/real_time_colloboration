@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
+import ConvexClientProvider from "./ConvexClientProvider"
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -26,9 +28,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
+        suppressHydrationWarning
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <NuqsAdapter>
+          <ConvexClientProvider>  {/* ← Wrap children with ConvexProvider */}
+            {children}
+          </ConvexClientProvider>
+        </NuqsAdapter>
       </body>
     </html>
   );

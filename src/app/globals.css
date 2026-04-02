@@ -6,6 +6,7 @@
 
 @layer base {
   :root {
+     --brm: 1;
 
     --background: 0 0% 100%;
     --foreground: 0 0% 3.9%;
@@ -84,8 +85,17 @@
     --chart-5: 340 75% 55%}
 }
 
+@supports (corner-shape: squircle) {
+  :root {
+    --brm: 2;
+  }
+}
 
-/* CUSTOM STYLE  */
+.squircle{
+    border-radius: calc(16px * var(--brm));
+    corner-shape: squircle;
+}
+/* CUSTOM STYLE  TIPTAP*/
 
 .input-field:focus{
    border-color: blue;
