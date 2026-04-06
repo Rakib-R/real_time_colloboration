@@ -30,12 +30,18 @@ import { Separator } from '@/components/ui/separator';
 import Paragraph from '@tiptap/extension-paragraph'
 import { LineHeightExtension } from '@/extensions/line-height'
 
-  // ZUSTAND
+//todo PRODUCTION FEATURE 
+import { useQuery } from 'convex/react';
+import { api } from '@/convex/_generated/api';
+import { Id } from '@/convex/_generated/dataModel';
+
 import useEditorStore from '@/app/store/use-editor'
 import Ruler from './ruler'
 
- export const Editor = () => {
+ export const Editor = ({ documentId }: { documentId: Id<"documents"> }) => {
   const { setEditor } = useEditorStore()
+
+  const document = useQuery(api.documents.getDocument , { id: documentId });
 
   const editor = useEditor({
 
@@ -111,20 +117,7 @@ import Ruler from './ruler'
             ResizableImage, 
         ],
 
-       content: `
-          <table>
-            <tr>
-              <th>Company</th>
-              <th>Contact</th>
-              <th>Country</th>
-            </tr>
-              <tr>
-              <td>Alfreds Futterkiste</td>
-              <td>Maria Anders</td>
-              <td>Germany</td>
-            </tr>
-          </table>
-      `,
+        content: document?.content || '<p>Loading...</p>',
       immediatelyRender: false,
   })
 
