@@ -1,8 +1,9 @@
+// apps/user-ui/pages/index.tsx (not app/page.tsx)
+
+import { redirect } from 'next/navigation';
 
 export default function Home() {
-  return (
-    <div className="m-8">
-      It is App route
-    </div>
-  );
+
+    redirect('/documents');
+  
 }
